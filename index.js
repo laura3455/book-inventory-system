@@ -1,24 +1,24 @@
 const express = require('express');
-const { Pool } = require('pg');  // If using PostgreSQL
+const { Pool } = require('pg');  
 const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
-// Database connection setup
+
 const pool = new Pool({
     user: 'your_username',
     host: 'localhost',
     database: 'your_database',
     password: 'your_password',
-    port: 5432,  // Default port for PostgreSQL
+    port: 5432,  
 });
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 
-// Add book endpoint
+
 app.post('/add-book', (req, res) => {
     const { title, author, genre, pubDate, isbn } = req.body;
     const query = `INSERT INTO Inventory (title, author, genre, publication_date, isbn)
@@ -29,7 +29,7 @@ app.post('/add-book', (req, res) => {
     });
 });
 
-// Filter books endpoint
+
 app.get('/filter-books', (req, res) => {
     const { title, author, genre, pubDate } = req.query;
     const query = `SELECT * FROM Inventory WHERE 
@@ -43,7 +43,7 @@ app.get('/filter-books', (req, res) => {
     });
 });
 
-// Export books endpoint
+
 app.get('/export-books', (req, res) => {
     const format = req.query.format;
     const query = `SELECT * FROM Inventory`;
@@ -63,7 +63,7 @@ app.get('/export-books', (req, res) => {
     });
 });
 
-// Start the server
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
