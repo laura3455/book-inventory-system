@@ -31,7 +31,7 @@ document.getElementById('filterBooksForm').onsubmit = async (e) => {
     const books = await response.json();
 
     const tbody = document.getElementById('booksList').querySelector('tbody');
-    tbody.innerHTML = '';  // Clear previous results
+    tbody.innerHTML = '';  
     books.forEach(book => {
         const row = `<tr>
                         <td>${book.title}</td>
